@@ -34,7 +34,7 @@ def indicators_mavol():
 
 
 def indicators_macd():
-    data["macd"], data["macd_signal"], data["macd_hist"] = talib.MACD(data['Close'])
+    data["macd"], data["macd_signal"], data["macd_hist"] = talib.MACD(data["Close"])
 
 
 def show_chart():
@@ -63,19 +63,19 @@ def show_chart():
     candlestick_ohlc(ax_main, ohlc, colorup="r", colordown="g", width=0.8)
     ax_main.legend()
 
-    ax_macd.plot(data.index, data["macd"], label="macd", color='y')
-    ax_macd.plot(data.index, data["macd_signal"], label="signal", color='b')
+    ax_macd.plot(data.index, data["macd"], label="macd", color="y")
+    ax_macd.plot(data.index, data["macd_signal"], label="signal", color="b")
     macd_hist = data[data.macd_hist >= 0].macd_hist
-    ax_macd.bar(macd_hist.index.tolist(), macd_hist, color='r')
+    ax_macd.bar(macd_hist.index.tolist(), macd_hist, color="r")
     macd_hist = data[data.macd_hist < 0].macd_hist
-    ax_macd.bar(macd_hist.index.tolist(), macd_hist, color='g')
+    ax_macd.bar(macd_hist.index.tolist(), macd_hist, color="g")
     ax_macd.get_xaxis().set_visible(False)
     ax_macd.legend()
 
     volume = data[data.Volume >= data.mavol].Volume
-    ax_vol.bar(volume.index.tolist(), volume, color='r')
+    ax_vol.bar(volume.index.tolist(), volume, color="r")
     volume = data[data.Volume < data.mavol].Volume
-    ax_vol.bar(volume.index.tolist(), volume, color='g')
+    ax_vol.bar(volume.index.tolist(), volume, color="g")
     ax_vol.get_xaxis().set_visible(False)
 
     fig.tight_layout()
